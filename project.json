@@ -1,0 +1,24 @@
+{
+  "name": "we-are-the-same-api",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "we-are-the-same-api:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "we-are-the-same-api:build:development"
+        },
+        "production": {
+          "buildTarget": "we-are-the-same-api:build:production"
+        }
+      }
+    }
+  }
+}
