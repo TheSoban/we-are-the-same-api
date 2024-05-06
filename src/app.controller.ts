@@ -1,4 +1,5 @@
 import { All, Controller, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller()
 export class AppController {
@@ -7,8 +8,8 @@ export class AppController {
     return 'API is working!';
   }
 
+  @UseGuards(AuthGuard())
   @All('test')
-  @UseGuards()
   test(): string {
     return 'Auth test';
   }
