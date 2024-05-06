@@ -6,6 +6,8 @@ import { AppConfigService } from './config';
 const booststrap = async () => {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors({ origin: '*' });
+
   const configService = app.get<AppConfigService>(ConfigService);
 
   const { port } = configService.get('general');
