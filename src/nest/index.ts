@@ -1,2 +1,2 @@
 export * from './generic.service';
-export * from './utils';
+export * from './generic.validation';

@@ -6,6 +6,6 @@ import { MovieDto } from './movie.validation';
 @Injectable()
 export class MovieService extends GenericService<MovieDto> {
   constructor(firebaseRepository: FirebaseRepository) {
-    super(firebaseRepository, 'movies', MovieDto.prototype);
+    super(firebaseRepository, 'movies');
   }
 }
