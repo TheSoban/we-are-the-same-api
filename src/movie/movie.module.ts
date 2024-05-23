@@ -9,5 +9,6 @@ import { MovieService } from './movie.service';
   imports: [ConfigModule, FirebaseModule, AuthModule],
   providers: [MovieService],
   controllers: [MovieController],
+  exports: [MovieService],
 })
 export class MovieModule {}

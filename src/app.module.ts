@@ -4,10 +4,11 @@ import { AppController } from './app.controller';
 import { AuthModule } from './auth';
 import { ConfigModule } from './config';
 import { MovieModule } from './movie';
+import { PreferenceModule } from './preference';
 import { ZodFilter } from './zod';
 
 @Module({
-  imports: [ConfigModule, MovieModule, AuthModule],
+  imports: [ConfigModule, MovieModule, AuthModule, PreferenceModule],
   controllers: [AppController],
   providers: [
     {

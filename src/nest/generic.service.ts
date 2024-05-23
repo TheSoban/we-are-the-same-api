@@ -1,11 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
+import { FieldPath } from 'firebase-admin/firestore';
 import { FirebaseRepository } from '../firebase/firebase.repository';
 import { PaginationDto } from './generic.validation';
-
 @Injectable()
 export class GenericService<DTO> {
-  private readonly collection = this.firebaseRepository.db.collection(this.collectionName);
-  private readonly logger = new Logger(`${GenericService.name} - ${this.collectionName}`);
+  protected readonly collection = this.firebaseRepository.db.collection(this.collectionName);
+  protected readonly logger = new Logger(`${GenericService.name} - ${this.collectionName}`);
 
   constructor(protected readonly firebaseRepository: FirebaseRepository, protected readonly collectionName: string) {}
 
@@ -35,6 +35,14 @@ export class GenericService<DTO> {
     return this.snapshotToData(snapshot);
   }
 
+  public async findByIds(ids: string[]) {
+    this.logger.log(`Searching for item: ${ids.join(', ')}`);
+
+    const snapshot = await this.collection.where(FieldPath.documentId(), 'in', ids).get();
+
+    return snapshot.docs.map(this.snapshotToData);
+  }
+
   public async create(data: DTO) {
     this.logger.log('Creating an item');
 
@@ -61,7 +69,7 @@ export class GenericService<DTO> {
     return { delete: true };
   }
 
-  private snapshotToData<
+  protected snapshotToData<
     T extends FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData, FirebaseFirestore.DocumentData>
   >(snapshot: T) {
     return {
